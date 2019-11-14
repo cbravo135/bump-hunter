@@ -186,7 +186,7 @@ HpsFitResult* BumpHunter::performSearch(TH1* histogram, double mass_hypothesis, 
     this->calculatePValue(fit_result);
     std::cout<<"After Calculation of PValue"<<std::endl;
     std::cin.ignore();
-    this->getUpperLimit(histogram, fit_result);
+    //this->getUpperLimit(histogram, fit_result);   // Rafo: Commenting for now, untill it will be understood how does it work, and why it does infinite loop
     std::cout<<"After Getting the Upper Limit"<<std::endl;
     std::cin.ignore();
     
@@ -313,7 +313,7 @@ void BumpHunter::getUpperLimit(TH1* histogram, HpsFitResult* result) {
 
         // 1) Calculate the likelihood ratio which is chi2 distributed. 
         // 2) From the chi2, calculate the p-value.
-        this->getChi2Prob(cond_nll, mle_nll, q0, p_value);  
+        this->getChi2Prob(cond_nll, mle_nll, q0, p_value);
 
         this->printDebug("p-value after fit : " + std::to_string(p_value)); 
         
@@ -367,7 +367,11 @@ void BumpHunter::getChi2Prob(double cond_nll, double mle_nll, double &q0, double
     q0 = 2*diff;
     this->printDebug("q0: " + std::to_string(q0));
     
+    std::cout<<"cond_nll = "<<cond_nll<<"    mle_nll = "<<mle_nll<<std::endl;
+    std::cout<<"q0 is "<<q0<<std::endl;
     p_value = ROOT::Math::chisquared_cdf_c(q0, 1);
+    std::cout<<"Pvalue is "<<p_value<<std::endl;
+    std::cin.ignore();
     this->printDebug("p-value before dividing: " + std::to_string(p_value));  
     p_value *= 0.5;
     this->printDebug("p-value: " + std::to_string(p_value)); 
