@@ -136,7 +136,7 @@ HpsFitResult* BumpHunter::performSearch(TH1* histogram, double mass_hypothesis, 
             bkg->SetParNames("pol0","pol1","pol2","pol3","pol4","pol5");
         }
 
-        TFitResultPtr result = histogram->Fit("bkg", "LES+", "", window_start_, window_end_); 
+        TFitResultPtr result = histogram->Fit(bkg, "LES+", "", window_start_, window_end_);
         fit_result->setBkgFitResult(result); 
         //result->Print();
 
@@ -147,6 +147,7 @@ HpsFitResult* BumpHunter::performSearch(TH1* histogram, double mass_hypothesis, 
     std::cout << "[ BumpHunter ]: Performing a signal+background fit." << std::endl;
     std::cout << "***************************************************" << std::endl;
     std::cout << "***************************************************" << std::endl;
+    
     
     TF1* full{nullptr};  
     if (poly_order_ == 3) { 
@@ -170,17 +171,24 @@ HpsFitResult* BumpHunter::performSearch(TH1* histogram, double mass_hypothesis, 
         full->FixParameter(8, mass_resolution_); 
 
     }    
-       
+    std::cout<<"Before the Signal Fit"<<std::endl;
+    std::cin.ignore();
     TFitResultPtr full_result = histogram->Fit("full", "LES+", "", window_start_, window_end_);
     fit_result->setCompFitResult(full_result); 
     //full_result->Print();
 
+    std::cout<<"After the Signal Fit"<<std::endl;
+    std::cin.ignore();
     //if (!batch) { 
         //printer->print(histogram, window_start_, window_end_, "test_print.pdf");
     //}
 
     this->calculatePValue(fit_result);
+    std::cout<<"After Calculation of PValue"<<std::endl;
+    std::cin.ignore();
     this->getUpperLimit(histogram, fit_result);
+    std::cout<<"After Getting the Upper Limit"<<std::endl;
+    std::cin.ignore();
     
     // Persist the mass hypothesis used for this fit
     fit_result->setMass(mass_hypothesis_); 
