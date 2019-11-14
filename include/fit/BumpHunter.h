@@ -117,7 +117,8 @@ class BumpHunter {
             //return -6.2*mass*mass*mass + 0.91*mass*mass - 0.00297*mass + 0.000579; 
             //return 0.0389938364847*mass - 0.0000713783511061; // ideal
             //return 0.0501460737193*mass - 0.0000917925595224; // scaled to moller mass from data
-            return 0.0532190838657*mass - 0.0000922283032152; // scaled to moller mass + sys
+           // return 0.0532190838657*mass - 0.0000922283032152; // scaled to moller mass + sys
+            return 0.000955 - 0.004198*mass + 0.2367*mass*mass - 0.7009*mass*mass*mass; // From Sebouh's Thesis
         };
 
         /**
