@@ -37,16 +37,20 @@ int main(int argc, char **argv) {
     //BumpHunter::BkgModel model{BumpHunter::BkgModel::EXP_POLY_X_POLY};
 
     // Name of file containing the histogram that will be fit. 
+    //string file_path{"/Work/HPS/Analyze/BumpHunt_2016/SebouhFiles/cutflows.root"};
     string file_path{""};
 
     // The name of the histogram to fit. 
+    //string hist_name{"mass_tweak__p_tot_min_cut"};
     string hist_name{""};
 
     // The path to where the results will be saved. 
+    //string output_file{"/Work/HPS/Analyze/BumpHunt_2016/SebouhFiles/BumpHunterResult.root"};
     string output_file{""};
 
     // The signal hypothesis to use in the fit. 
-    double mass_hypothesis = 0; 
+    //double mass_hypothesis = 0.095; 
+    double mass_hypothesis = 0.; 
 
     // The factor that determines the size of the mass window as
     //      window_size = (mass_resolution*win_factor)
